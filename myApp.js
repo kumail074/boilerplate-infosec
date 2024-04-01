@@ -18,8 +18,8 @@ app.use(helmet.hsts(
     maxAge: 7776000,
     force: true
   }
-
-))
+));
+app.use(helmet.dnsPrefetchControl());
 
 
 
