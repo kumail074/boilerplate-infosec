@@ -4,7 +4,7 @@ const app = express();
 
 app.use(helmet.hidePoweredBy());
 
-app.use(
+/* app.use(
   helmet.frameguard(
   {
     action: 'deny',
@@ -28,8 +28,32 @@ app.use(helmet.contentSecurityPolicy(
       scriptSrc: ["'self'", 'trusted-cdn.com']
     }
   }
-));
+));  
+*/
 
+app.use(helmet(
+  {
+  hidePoweredBy: true,
+  frameguard: {
+    action: 'deny',
+  },
+  xssFilter: true,
+  noSniff: true,
+  ieNoOpen: true,
+  hsts: {
+   maxAge: 7776000,
+   force: true,
+  },
+  dnsPrefetchControl: true,
+  noCache: true,
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", 'trusted-cdn.com']
+    }
+  },
+  }
+));
 
 
 
