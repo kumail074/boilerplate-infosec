@@ -10,7 +10,7 @@ app.use(
     action: 'deny',
   }
 ));
-
+app.use(helmet.xssFilter());
 
 
 
